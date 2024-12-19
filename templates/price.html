@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commodity Price Prediction</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f8e9; /* Light earthy background */
+            color: #333;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #6d9e3f; /* Fresh green color */
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            border-right: 1px solid #ccc;
+            background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png'); /* Subtle pattern */
+            background-size: cover;
+        }
+
+        .sidebar img {
+            width: 150px;
+            height: auto;
+            margin-bottom: 30px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 12px 0;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .sidebar ul li:hover {
+            background-color: #81c784; /* Lighter green on hover */
+        }
+
+        /* Navbar styling */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #6d9e3f; /* Green for navbar */
+            color: #fff;
+            position: fixed;
+            width: calc(100% - 250px);
+            left: 250px;
+            top: 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .logo h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .navbar .nav-links a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+        }
+
+        .navbar .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Dashboard Container */
+        .dashboard-container {
+            margin-top: 60px; /* To push content below the navbar */
+            margin-left: 270px; /* To align content next to the sidebar */
+            padding: 20px;
+        }
+
+        /* Section styling */
+        .section {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            color: #000;
+        }
+
+        h1, h2 {
+            margin-top: 20px;
+            color: #333;
+            font-size: 24px;
+        }
+
+        .form-inline label, .form-inline select {
+            margin-right: 10px;
+        }
+
+        .btn-primary {
+            margin-top: 20px;
+            width: 100%;
+            font-size: 16px;
+            padding: 12px;
+            background-color: #6d9e3f; /* Green button */
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #4CAF50; /* Darker green on hover */
+        }
+
+        #predictionResult {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        /* Table styling */
+        .table th, .table td {
+            background-color: #fafafa;
+            border-color: #ccc;
+        }
+
+        .table th {
+            font-weight: bold;
+        }
+
+        .table td {
+            text-align: center;
+        }
+
+        /* Sidebar icons */
+        .sidebar ul li i {
+            margin-right: 10px;
+        }
+
+        /* Logo in the sidebar */
+        .sidebar img {
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <img src="agro.jpg" alt="AgroWise Logo">
+    <ul>
+        <li><a href="dashboard.html" style="color: white; text-decoration: none;"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+        <li><a href="price.html" style="color: white; text-decoration: none;"><i class="fas fa-tags"></i> Commodity Price Predictor</a></li>
+        <li><a href="yield.html" style="color: white; text-decoration: none;"><i class="fas fa-leaf"></i> Crop Yield Predictor</a></li>
+    </ul>
+</div>
+
+<!-- Navbar -->
+<div class="navbar">
+    <div class="logo">
+        <h1>AgroWise</h1>
+    </div>
+    <ul class="nav-links d-flex list-unstyled mb-0">
+        <li class="mr-3"><a href="home.html" style="color: #fff; text-decoration: none;">Home</a></li>
+    </ul>
+</div>
+
+
+
+<!-- Dashboard Container -->
+<div class="dashboard-container">
+    <!-- Prediction Form Section -->
+    <div class="section">
+        <h2>Predict Commodity Price</h2>
+        <form id="predictionForm" class="form-inline mb-4">
+            <label for="commodity">Commodity:</label>
+            <select id="commodity" class="form-control">
+                {% for commodity in commodities %}
+                    <option value="{{ commodity }}">{{ commodity }}</option>
+                {% endfor %}
+            </select>
+            
+            <label for="market">Market:</label>
+            <select id="market" class="form-control">
+                {% for market in markets %}
+                    <option value="{{ market }}">{{ market }}</option>
+                {% endfor %}
+            </select>
+            
+            <button type="button" onclick="makePrediction()" class="btn btn-primary">Predict Price</button>
+        </form>
+        <div id="predictionResult" class="alert alert-info" style="display: none;"></div>
+    </div>
+
+    <!-- Commodity Data Table Section -->
+    <div class="section">
+        <h2>Commodity Price Data</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>State</th>
+                    <th>District</th>
+                    <th>Commodity</th>
+                    <th>Variety</th>
+                    <th>Grade</th>
+                    <th>Min Price</th>
+                    <th>Max Price</th>
+                    <th>Modal Price</th>
+                    <th>Commodity Code</th>
+                </tr>
+            </thead>
+            <tbody id="dataTableBody">
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function makePrediction() {
+        const commodity = document.getElementById('commodity').value;
+        const market = document.getElementById('market').value;
+
+        fetch('/predict', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ commodity, market })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                document.getElementById('predictionResult').style.display = 'none';
+                alert(data.error);
+            } else {
+                document.getElementById('predictionResult').style.display = 'block';
+                document.getElementById('predictionResult').innerHTML = `
+                    Predicted Price for ${data.commodity} in ${data.market}: Rs ${data.predicted_price} / Quintal
+                `;
+
+                const dataTableBody = document.getElementById('dataTableBody');
+                dataTableBody.innerHTML = '';  
+
+                data.filtered_data.forEach(row => {
+                    const tableRow = `
+                        <tr>
+                            <td>${row.State}</td>
+                            <td>${row.District}</td>
+                            <td>${row.Commodity}</td>
+                            <td>${row.Variety}</td>
+                            <td>${row.Grade}</td>
+                            <td>${row.Min_Price}</td>
+                            <td>${row.Max_Price}</td>
+                            <td>${row.Modal_Price}</td>
+                            <td>${row.Commodity_Code}</td>
+                        </tr>
+                    `;
+                    dataTableBody.insertAdjacentHTML('beforeend', tableRow);
+                });
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

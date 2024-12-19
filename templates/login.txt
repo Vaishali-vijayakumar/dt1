@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f8e9; /* Light earthy background */
+            color: #333;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #6d9e3f; /* Fresh green color */
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            border-right: 1px solid #ccc;
+            background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png'); /* Subtle pattern */
+            background-size: cover;
+        }
+
+        .sidebar img {
+            width: 150px;
+            height: auto;
+            margin-bottom: 30px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 12px 0;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .sidebar ul li:hover {
+            background-color: #81c784; /* Lighter green on hover */
+        }
+
+        /* Navbar styling */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #6d9e3f; /* Green for navbar */
+            color: #fff;
+            position: fixed;
+            width: calc(100% - 250px);
+            left: 250px;
+            top: 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .logo h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar .nav-links a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+        }
+
+        .navbar .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Login Form Container */
+        .form-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            margin-top: 150px; /* To push form below navbar */
+            margin-left: 650px; /* Align form next to sidebar */
+        }
+
+        .form-container h2 {
+            margin-bottom: 20px;
+            color: #6d9e3f; /* Green color for heading */
+            text-align: center;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            margin: 12px 0;
+            border: 1px solid #6d9e3f;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #6d9e3f;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #4CAF50; /* Darker green on hover */
+        }
+
+        .forgot-password, .register-link a {
+            color: #6d9e3f;
+            text-decoration: none;
+        }
+
+        .forgot-password:hover, .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .footer a {
+            color: #6d9e3f;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Sidebar icons */
+        .sidebar ul li i {
+            margin-right: 10px;
+        }
+
+        /* Logo in the sidebar */
+        .sidebar img {
+            border-radius: 8px;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <img src="agro.jpg" alt="AgroWise Logo" style="width: 150px; height: auto;">
+    <ul>
+        <li><a href="/dashboard" style="color: white; text-decoration: none;"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+        <li><a href="/price" style="color: white; text-decoration: none;"><i class="fas fa-tags"></i> Commodity Price Predictor</a></li>
+        <li><a href="/yield" style="color: white; text-decoration: none;"><i class="fas fa-leaf"></i> Crop Yield Predictor</a></li>
+            </ul>
+</div>
+
+<!-- Navbar -->
+<div class="navbar">
+    <div class="logo">
+        <h1>AgroWise</h1>
+    </div>
+    <div class="nav-links">
+        <a href="/home">Home</a>
+        <a href="/login">Login</a>
+        <a href="/sign">Sign Up</a>
+    </div>
+</div>
+
+<!-- Login Form -->
+<div class="form-container">
+    <h2>Login</h2>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" class="input-field" placeholder="Enter your email">
+
+    <label for="password">Password</label>
+    <input type="password" id="password" class="input-field" placeholder="Enter your password">
+
+    <button class="submit-btn">Login</button>
+
+    <div class="forgot-password">
+        <a href="#">Forgot your password?</a>
+    </div>
+
+    <div class="footer">
+        <p>Don't have an account? <a href="sign.html">Sign Up</a></p>
+    </div>
+</div>
+<script>
+    document.querySelector('.submit-btn').addEventListener('click', async () => {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        const response = await fetch('/login.html', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+            alert(result.message);
+            window.location.href = 'dashboard.html'; // Redirect to dashboard
+        } else {
+            alert(result.error);
+        }
+    });
+</script>
+
+</body>
+</html>

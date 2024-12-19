@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f8e9; /* Light earthy background */
+            color: #333;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #6d9e3f; /* Fresh green color */
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            border-right: 1px solid #ccc;
+            background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png'); /* Subtle pattern */
+            background-size: cover;
+        }
+
+        .sidebar img {
+            width: 150px;
+            height: auto;
+            margin-bottom: 30px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 12px 0;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .sidebar ul li:hover {
+            background-color: #81c784; /* Lighter green on hover */
+        }
+
+        /* Navbar styling */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #6d9e3f; /* Green for navbar */
+            color: #fff;
+            position: fixed;
+            width: calc(100% - 250px);
+            left: 250px;
+            top: 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .logo h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .navbar .nav-links a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+        }
+
+        .navbar .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Dashboard Container */
+        .dashboard-container {
+            margin-top: 60px; /* To push content below the navbar */
+            margin-left: 270px; /* To align content next to the sidebar */
+            padding: 20px;
+            color: #fff;
+        }
+
+        /* Section styling */
+        .section {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            max-width: auto;
+            margin-left: auto;
+            margin-right: auto;
+            color: #000;
+        }
+
+        h1, h2 {
+            margin-top: 20px;
+            color: #333;
+            font-size: 24px;
+        }
+
+        .form-inline label, .form-inline select {
+            margin-right: 10px;
+        }
+
+        .btn-primary {
+            margin-top: 20px;
+            width: 100%;
+            font-size: 16px;
+            padding: 12px;
+            background-color: #6d9e3f; /* Green button */
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #4CAF50; /* Darker green on hover */
+        }
+
+        #predictionResult {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        /* Table styling */
+        .table th, .table td {
+            background-color: #fafafa;
+            border-color: #ccc;
+        }
+
+        .table th {
+            font-weight: bold;
+        }
+
+        .table td {
+            text-align: center;
+        }
+
+        /* Sidebar icons */
+        .sidebar ul li i {
+            margin-right: 10px;
+        }
+
+        /* Logo in the sidebar */
+        .sidebar img {
+            border-radius: 8px;
+        }
+
+        /* Contact Us Section Styling */
+        .contact-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #81c784, #4caf50); /* Adding gradient */
+            background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+            background-color: #6d9e3f; /* Fresh green color */
+            background-size: cover;
+            color: white;
+            padding: 40px 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-section h2 {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .contact-info-social {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            max-width: 1200px;
+            margin-top: 40px;
+            padding: 20px;
+            border-radius: 8px;
+            background: white;
+            color: #333;
+        }
+
+        .contact-info {
+            flex: 1;
+            padding-right: 20px;
+            text-align: left;
+        }
+
+        .contact-info p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .social-links {
+            flex: 1;
+            padding-left: 20px;
+            text-align: left;
+        }
+
+        .social-links p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .social-links button {
+            background-color: #4caf50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .social-links button:hover {
+            background-color: #388e3c;
+        }
+
+        .social-links a {
+            margin: 5px;
+            color: #4caf50;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .social-links a:hover {
+            color: #388e3c;
+        }
+
+        /* Social Icons */
+        .social-icons a {
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .social-icons img {
+            width: 30px;
+            height: 30px;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            .contact-info-social {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-info, .social-links {
+                flex: none;
+                padding: 10px;
+                text-align: center;
+            }
+
+            .sidebar {
+                width: 200px; /* Smaller sidebar */
+            }
+
+            .navbar {
+                width: calc(100% - 200px); /* Adjust navbar width */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <img src="agro.jpg" alt="AgroWise Logo" style="width: 150px; height: auto;">
+    <ul>
+        <li><a href="/dashboard" style="color: white; text-decoration: none;"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+        <li><a href="price.html" style="color: white; text-decoration: none;">Price Prediction</a></li>
+        <li><a href="yield.html" style="color: white; text-decoration: none;">Crop Yield Prediction</a></li>
+        </ul>
+</div>
+
+<!-- Navbar -->
+<div class="navbar">
+    <div class="logo">
+        <h1>AgroWise</h1>
+    </div>
+    <ul class="nav-links d-flex list-unstyled mb-0">
+        <li class="mr-3"><a href="home.html" style="color: #fff; text-decoration: none;">Home</a></li>
+        <li class="mr-3"><a href="login.html" style="color: #fff; text-decoration: none;">Login</a></li>
+<li class="mr-3"><a href="sign.html" style="color: #fff; text-decoration: none;">signin</a></li>
+    </ul>
+</div>
+
+<!-- Dashboard Container -->
+<div class="dashboard-container">
+    <!-- Hero Section -->
+    <div class="section welcome-section">
+        <h1>Welcome to AgroWise</h1>
+        <p>AgroWise is your one-stop solution for smarter agricultural management. Our cutting-edge tools empower farmers to predict commodity prices, optimize crop yields, and make informed decisions.</p>
+    </div>
+
+    <!-- Why AgroWise Section -->
+    <div class="section">
+        <h2>Why Choose AgroWise?</h2>
+        <p>AgroWise stands out for its innovative approach to crop management and prediction:</p>
+        <ul>
+            <li><strong>Data-Driven Insights:</strong> Use advanced AI models to predict market trends and maximize profitability.</li>
+            <li><strong>Improved Yield:</strong> Optimize resources like water, fertilizer, and pesticides with precise recommendations.</li>
+            <li><strong>User-Friendly Interface:</strong> Access all tools easily, even for non-tech-savvy users.</li>
+            <li><strong>Community Support:</strong> Join a network of farmers and experts to share insights and best practices.</li>
+        </ul>
+    </div>
+<!-- Contact Us Section -->
+<div class="section contact-section">
+    <h2 style="color: white;">Let's Connect</h2>
+    <p>Have questions or need assistance? We're just a message away.</p>
+    
+    <div class="contact-info-social">
+        <!-- Contact Info Section (Left Side) -->
+        <div class="contact-info">
+            <h3>Meet Us</h3>
+            <p><strong>Email:</strong> <a href="mailto:info@agrowise.com" style="text-decoration: none; color: #4caf50;">info@agrowise.com</a></p>
+            <p><strong>Phone:</strong> +91 98765 43210</p>
+            <p><strong>Address:</strong> 123 AgroWise St, Farm City, India</p>
+        </div>
+        
+        <!-- Social Media Section (Right Side) -->
+        <div class="social-links">
+            <h3>Pitch Us via Email</h3>
+            <p>If you would like to discuss a potential project or collaboration, please feel free to contact us through the following email address: <strong>info@agrowise.com</strong>. Kindly include a brief description of your project or inquiry, and we will get back to you at the earliest convenience.</p>
+            <button type="submit" class="send-btn">Send</button>
+            <div class="social-icons">
+                <p>Follow us on:</p>
+                <a href="https://facebook.com" target="_blank" title="Facebook">
+                    <img src="https://img.icons8.com/color/48/000000/facebook.png" alt="Facebook" style="width: 30px; height: 30px; margin: 5px;">
+                </a>
+                <a href="https://twitter.com" target="_blank" title="Twitter">
+                    <img src="https://img.icons8.com/color/48/000000/twitter.png" alt="Twitter" style="width: 30px; height: 30px; margin: 5px;">
+                </a>
+                <a href="https://instagram.com" target="_blank" title="Instagram">
+                    <img src="https://img.icons8.com/color/48/000000/instagram-new.png" alt="Instagram" style="width: 30px; height: 30px; margin: 5px;">
+                </a>
+                <a href="https://linkedin.com" target="_blank" title="LinkedIn">
+                    <img src="https://img.icons8.com/color/48/000000/linkedin.png" alt="LinkedIn" style="width: 30px; height: 30px; margin: 5px;">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
